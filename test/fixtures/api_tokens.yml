@@ -1,4 +1,0 @@
-one:
-  name: api token 1
-  token: <%= SecureRandom.uuid %>
-  secret: <%= Nifty::Utils::RandomString.generate length: 30 %>

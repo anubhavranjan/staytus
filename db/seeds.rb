@@ -11,7 +11,7 @@ ApiToken.create!(:name => "Demo Token", :token => 'demo', :secret => 'demo')
 #
 # Create a default site
 #
-Site.create!(:title => 'The Widgets Status Site', :description => 'Widgets Inc is a revolutionary widget platform. This is our status site. Contact us at team@widgetsrus.io with any questions or problems.', :domain => Rails.env.production? ? 'demo.staytus.co' : 'localhost:8787', :support_email => 'team@viaduct.io', :website_url => 'http://staytus.co', :time_zone => 'London')
+Site.create!(:title => 'The Widgets Status Site', :description => 'Widgets Inc is a revolutionary widget platform. This is our status site. Contact us at team@widgetsrus.io with any questions or problems.', :domain => Rails.env.production? ? 'demo.staytus.co' : 'localhost:8787', :support_email => 'team@viaduct.io', :website_url => 'http://staytus.co', :time_zone => 'London', :http_protocol => 'http')
 
 #
 # Create default statuses
@@ -116,7 +116,7 @@ update.created_at = 15.minutes.ago
 update.save!
 
 update = issue.updates.build
-update.text = "It appears that the changes we made earlier weren't properly propogated to all routers on our network. We're pushing a fix out not."
+update.text = "It appears that the changes we made earlier weren't properly propogated to all routers on our network. We're pushing a fix out now."
 update.state = 'identified'
 update.user = User.first
 issue.service_status = ServiceStatus.find_by_name('Partial Outage')

@@ -11,15 +11,15 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  identifier        :string(255)
-#  notify            :boolean          default("0")
+#  notify            :boolean          default(FALSE)
 #
 
 class IssueUpdate < ActiveRecord::Base
 
-  validates :state, :inclusion => {:in => Issue::STATES, :allow_blank => true}
+  validates :state, :inclusion => {:in => Issue::STATES}
   validates :text, :presence => true
 
-  belongs_to :issue
+  belongs_to :issue, :touch => true
   belongs_to :user
   belongs_to :service_status
 

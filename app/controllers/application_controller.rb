@@ -2,10 +2,15 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  around_filter :set_time_zone
-  before_filter :ensure_site
+  around_action :set_time_zone
+  before_action :ensure_site
+
+  rescue_from Authie::Session::ValidityError, :with => :auth_session_error
 
   private
+  def auth_session_error
+    redirect_to admin_login_path, :alert => "Your session is no longer valid. Please login again to continue..."
+  end
 
   def set_time_zone
     if has_site?
@@ -13,6 +18,7 @@ class ApplicationController < ActionController::Base
       Chronic.time_class = Time.zone
     end
     yield
+  ensure
     Chronic.time_class = Time
     Time.zone = nil
   end

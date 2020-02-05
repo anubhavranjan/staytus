@@ -1,4 +1,0 @@
-one:
-  email_address: test@staytus.io
-  name: staytus
-  password_digest: <%= BCrypt::Password.create "staytus" %>

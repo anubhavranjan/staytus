@@ -9,12 +9,12 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  identifier     :string(255)
-#  notify         :boolean          default("0")
+#  notify         :boolean          default(FALSE)
 #
 
 class MaintenanceUpdate < ActiveRecord::Base
 
-  belongs_to :maintenance
+  belongs_to :maintenance, :touch => true
   belongs_to :user
 
   validates :text, :presence => true
